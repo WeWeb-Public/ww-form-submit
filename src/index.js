@@ -7,6 +7,10 @@ const addComponent = function () {
     if (window.vm) {
 
         wwLib.wwObject.register({
+            /* wwManager:start */
+            cmsOptions: {
+            },
+            /* wwManager:end */
             content: {
                 type: name,
                 data: {}
@@ -15,11 +19,7 @@ const addComponent = function () {
                 wwAnalytics: {
                     click: false
                 }
-            },
-            /* wwManager:start */
-            cmsOptions: {
             }
-            /* wwManager:end */
         });
 
         window.vm.addComponent({

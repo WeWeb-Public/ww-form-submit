@@ -6,7 +6,6 @@
     </div>
 </template>
 
-
 <script>
 export default {
     name: "ww-form-submit",
@@ -21,11 +20,6 @@ export default {
     computed: {
         wwObject() {
             return this.wwObjectCtrl.get();
-        }
-    },
-    methods: {
-        submit() {
-
         }
     },
     mounted() {

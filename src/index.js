@@ -17,7 +17,7 @@ const addComponent = function () {
             },
             upsales: {
                 wwAnalytics: {
-                    click: false
+                    click: true
                 }
             }
         });

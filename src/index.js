@@ -9,6 +9,10 @@ const addComponent = function () {
         wwLib.wwObject.register({
             /* wwManager:start */
             cmsOptions: {
+                displayName: {
+                    en: 'Form Submit',
+                    fr: 'Bouton de Formulaire'
+                },
             },
             /* wwManager:end */
             content: {

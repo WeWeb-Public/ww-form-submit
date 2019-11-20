@@ -17,7 +17,66 @@ const addComponent = function () {
             /* wwManager:end */
             content: {
                 type: name,
-                data: {}
+                data: {
+                    wwObject: wwLib.wwObject.getDefault({
+                        type: 'ww-button',
+                        data: {
+                            text: wwLib.wwObject.getDefault({
+                                type: 'ww-text',
+                                data: {
+                                    text: {
+                                        fr: 'Envoyer',
+                                        en: 'Submit'
+                                    }
+                                }
+                            })
+                        }
+                    }),
+                    wwObjectOnLoading: wwLib.wwObject.getDefault({
+                        type: 'ww-button',
+                        data: {
+                            text: wwLib.wwObject.getDefault({
+                                type: 'ww-text',
+                                data: {
+                                    text: {
+                                        fr: 'Chargement...',
+                                        en: '<p>[[wwObject=0]] Loading...</p>'
+                                    },
+                                    children: [
+                                        wwLib.wwObject.getDefault({
+                                            type: 'ww-icon',
+                                            data: {
+                                                icon: 'fa fa-spinner fa-spin',
+                                                style: {
+                                                    borderWidth: 0,
+                                                    size: 20
+                                                }
+                                            }
+                                        })
+                                    ]
+                                }
+                            })
+                        }
+                    }),
+                    wwObjectOnSuccess: wwLib.wwObject.getDefault({
+                        type: 'ww-text',
+                        data: {
+                            text: {
+                                fr: '<p><span style="color: #19947c;">Formulaire envoyé</span></p>',
+                                en: '<p><span style="color: #19947c;">Sent</span></p>'
+                            }
+                        }
+                    }),
+                    wwObjectOnError: wwLib.wwObject.getDefault({
+                        type: 'ww-text',
+                        data: {
+                            text: {
+                                fr: '<p><span style="color: #ce003b;">Une erreur est survenue. Veuillez essayer plus tard.</span></p>',
+                                en: '<p><span style="color: #ce003b;">An error occured. Please try again later.</span></p>'
+                            }
+                        }
+                    })
+                }
             },
             upsales: {
                 wwAnalytics: {

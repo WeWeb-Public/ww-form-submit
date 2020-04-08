@@ -1,0 +1,24 @@
+{
+    "componentPath": "./src/wwObject.vue",
+    "content": {
+        "type": "ww-form-submit",
+        "data": {
+            "isNew": true,
+            "wwObject": null,
+            "wwObjectOnLoading": null,
+            "wwObjectOnSuccess": null,
+            "wwObjectOnError": null
+        }
+    },
+    "upsales": {
+        "wwAnalytics": {
+            "click": true
+        }
+    },
+    "cmsOptions": {
+        "displayName": {
+            "en": "Form Submit",
+            "fr": "Bouton de Formulaire"
+        }
+    }
+}

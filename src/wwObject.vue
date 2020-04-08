@@ -19,58 +19,101 @@
 export default {
     name: "ww-form-submit",
     props: {
-        wwObjectCtrl: Object,
+        wwObjectCtrl: Object
     },
     data() {
         return {
             wwLang: wwLib.wwLang,
-            status: 'default'
-        }
+            status: "default"
+        };
     },
     computed: {
         wwObject() {
             return this.wwObjectCtrl.get();
         },
         editMode() {
-            return this.wwObjectCtrl.getSectionCtrl().getEditMode() == 'CONTENT'
+            return this.wwObjectCtrl.getSectionCtrl().getEditMode() == "CONTENT";
         }
     },
     mounted() {
-        this.init()
-        wwLib.$on('ww-form-status', (status) => { this.setStatus(status) })
-        this.$emit('ww-loaded', this);
+        this.init();
+        wwLib.$on("ww-form-status", status => {
+            this.setStatus(status);
+        });
+        this.$emit("ww-loaded", this);
     },
     methods: {
         init() {
-            this.wwObject.content.data = this.wwObject.content.data || {}
-            this.wwObject.content.data.wwObject = this.wwObject.content.data.wwObject || wwLib.wwObject.getDefault({ type: 'ww-button' })
-            if (!this.wwObject.content.data.wwObjectOnLoading) {
-                this.wwObject.content.data.wwObjectOnLoading = this.wwObject.content.data.wwObject
-                wwLib.wwUtils.changeUniqueIds(this.wwObject.content.data.wwObjectOnLoading)
+            this.wwObject.content.data = this.wwObject.content.data || {};
+
+            if (this.wwObject.content.data.isNew) {
+                this.wwObject.content.data.wwObject = wwLib.wwObject.getDefault({
+                    type: "ww-button",
+                    data: {
+                        text: wwLib.wwObject.getDefault({
+                            type: "ww-text",
+                            data: {
+                                text: {
+                                    fr: "Envoyer",
+                                    en: "Submit"
+                                }
+                            }
+                        })
+                    }
+                });
+                this.wwObject.content.data.wwObjectOnLoading = wwLib.wwObject.getDefault({
+                    type: "ww-button",
+                    data: {
+                        text: wwLib.wwObject.getDefault({
+                            type: "ww-text",
+                            data: {
+                                text: {
+                                    fr: "Chargement...",
+                                    en: "<p>[[wwObject=0]] Loading...</p>"
+                                },
+                                children: [
+                                    wwLib.wwObject.getDefault({
+                                        type: "ww-icon",
+                                        data: {
+                                            icon: "fa fa-spinner fa-spin",
+                                            style: {
+                                                borderWidth: 0,
+                                                size: 20
+                                            }
+                                        }
+                                    })
+                                ]
+                            }
+                        })
+                    }
+                });
+                this.wwObject.content.data.wwObjectOnSuccess = wwLib.wwObject.getDefault({
+                    type: "ww-text",
+                    data: {
+                        text: {
+                            fr: '<p><span style="color: #19947c;">Formulaire envoyé</span></p>',
+                            en: '<p><span style="color: #19947c;">Sent</span></p>'
+                        }
+                    }
+                });
+                this.wwObject.content.data.wwObjectOnError = wwLib.wwObject.getDefault({
+                    type: "ww-text",
+                    data: {
+                        text: {
+                            fr: '<p><span style="color: #ce003b;">Une erreur est survenue. Veuillez essayer plus tard.</span></p>',
+                            en: '<p><span style="color: #ce003b;">An error occured. Please try again later.</span></p>'
+                        }
+                    }
+                });
+
+                delete this.wwObject.content.data.isNew;
             }
-            this.wwObject.content.data.wwObjectOnSuccess = this.wwObject.content.data.wwObjectOnSuccess ||  wwLib.wwObject.getDefault({
-                type: 'ww-text',
-                data: {
-                    text: {
-                        fr: '<p><span style="color: #19947c;">Formulaire envoyé</span></p>',
-                        en: '<p><span style="color: #19947c;">Sent</span></p>'
-                    }
-                }
-            })
-            this.wwObject.content.data.wwObjectOnError = this.wwObject.content.data.wwObjectOnError || wwLib.wwObject.getDefault({
-                type: 'ww-text',
-                data: {
-                    text: {
-                        fr: '<p><span style="color: #ce003b;">Une erreur est survenue. Veuillez essayer plus tard.</span></p>',
-                        en: '<p><span style="color: #ce003b;">An error occured. Please try again later.</span></p>'
-                    }
-                }
-            })
-            this.wwObjectCtrl.update(this.wwObject)
+
+            this.wwObjectCtrl.update(this.wwObject);
         },
         setStatus(status) {
-            this.status = status
-            this.wwObjectCtrl.update(this.wwObject)
+            this.status = status;
+            this.wwObjectCtrl.update(this.wwObject);
         }
     }
 };

@@ -110,6 +110,7 @@ export default {
             }
 
             this.wwObjectCtrl.update(this.wwObject);
+            this.wwObjectCtrl.globalEdit(result);
         },
         setStatus(status) {
             this.status = status;

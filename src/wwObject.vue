@@ -16,6 +16,20 @@
 </template>
 
 <script>
+/* wwManager:start */
+wwLib.wwPopups.addStory('WWFORM_SUBMIT_OPTIONS', {
+    title: {
+        en: 'Edit submit button',
+        fr: 'Editer le bouton de submit'
+    },
+    type: 'wwPopupEditWwObject',
+    buttons: null,
+    storyData: {
+        list: {}
+    }
+})
+/* wwManager:end */
+
 export default {
     name: "ww-form-submit",
     props: {
@@ -110,12 +124,29 @@ export default {
             }
 
             this.wwObjectCtrl.update(this.wwObject);
-            this.wwObjectCtrl.globalEdit(result);
         },
         setStatus(status) {
             this.status = status;
             this.wwObjectCtrl.update(this.wwObject);
+        },
+        /* wwManager:start */
+        async options() {
+            let options = {
+                firstPage: 'WWFORM_SUBMIT_OPTIONS',
+                data: {
+                    wwObject: this.wwObject,
+                }
+            }
+            try {
+                const result = await wwLib.wwPopups.open(options);
+                wwLib.wwObjectHover.setLock(this);
+                this.wwObjectCtrl.globalEdit(result);
+            } catch (err) {
+                wwLib.wwLog.error('ERROR', err)
+            }
+            wwLib.wwObjectHover.removeLock();
         }
+        /* wwManager:end */
     }
 };
 </script>

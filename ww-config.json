@@ -19,6 +19,20 @@
         "displayName": {
             "en": "Form Submit",
             "fr": "Bouton de Formulaire"
+        },
+        "wwObjectMenu": {
+            "items": [
+                {
+                    "name": "OPTIONS",
+                    "text": {
+                        "en": "Options...",
+                        "fr": "Options..."
+                    },
+                    "icon": "wwi wwi-edit-other",
+                    "main": true,
+                    "action": "options"
+                }
+            ]
         }
     }
 }
